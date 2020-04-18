@@ -1,9 +1,5 @@
-const express = require('express');
+const app = require('./app');
 
-const app = express();
-const router = express.Router();
+const PORT = process.env.PORT || 3333;
 
-router.get('/', (request, response)=> { response.json({msg: "Vamo ganhar esses 8000 ai"})})
-
-
-app.listen(3333);
+app.listen(PORT);
