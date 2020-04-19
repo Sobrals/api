@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  postgres:
+    image: postgres:alpine
+    ports:
+      - "${DB_PORT}:5432"
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASS=${DB_PASS}
+      - POSTGRES_DB=${DB_NAME}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    logging:
+      driver: none
+
+  nodejs:
+    image: node:alpine
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+
+  app:
+    build: .
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    command: yarn dev
+    depends_on:
+      - postgres
+    volumes:
+      - .:/usr/app
+
+volumes:
+  postgres_data:
