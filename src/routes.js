@@ -1,7 +1,8 @@
 const { Router } = require('express');
+const BrokerController = require('./controllers/BrokerController')
 
 const routes = new Router();
 
-routes.get('/', (_, response) => { return response.json({msg: 'Hello world'})})
+routes.post('/brokers', BrokerController.store);
 
 module.exports = routes;
