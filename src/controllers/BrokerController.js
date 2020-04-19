@@ -43,6 +43,16 @@ class BrokerController {
       return response.status(201).json({ id, name, email, phone, creci });
     }
 
+    async index(request, response) {
+      const brokers = await Broker.findAll({
+        attributes: ['id', 'name', 'email', 'creci', 'phone' ]
+      });
+
+
+      return response.status(200).json(brokers)
+
+    }
+
 }
 
 module.exports = new BrokerController()
