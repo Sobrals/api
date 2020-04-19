@@ -1,6 +1,7 @@
 const express = require('express');
 const routes = require('./routes');
 const dotenv = require('dotenv/config');
+const database = require('./database')
 
 class App {
   constructor() {
