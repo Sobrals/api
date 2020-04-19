@@ -1,4 +1,7 @@
-const Sequelize, { Model } = require('sequelize');
+const Sequelize = require('sequelize');
+const Model = Sequelize.Model
+
+const bcrypt = require('bcryptjs')
 
 class Broker extends Model {
   static init(sequelize) {
@@ -7,6 +10,7 @@ class Broker extends Model {
         name: Sequelize.STRING,
         email: Sequelize.STRING,
         phone: Sequelize.STRING,
+        password: Sequelize.VIRTUAL,
         password_hash: Sequelize.STRING,
         creci: Sequelize.STRING,
       },
@@ -17,7 +21,7 @@ class Broker extends Model {
 
     this.addHook('beforeSave', async broker => {
       if (broker.password) {
-        broker.password_hash = await bcrypt.hash(user.password, 8);
+        broker.password_hash = await bcrypt.hash(broker.password, 8);
       }
     });
 
