@@ -2,9 +2,11 @@ const Sequelize = require('sequelize');
 const databaseConfig =require('../config/database');
 
 const Broker = require('../models/Broker')
+const Client = require('../models/Client')
 
 
-const models = [Broker];
+
+const models = [Broker, Client];
 
 class Database {
   constructor() {
@@ -15,7 +17,9 @@ class Database {
     console.log('Iniciando database')
     this.connection = new Sequelize(databaseConfig);
 
-    models.map(model => model.init(this.connection));
+    models
+      .map(model => model.init(this.connection))
+      .map(model => model.associate && model.associate(this.connection.models));
   }
 }
 

@@ -48,7 +48,6 @@ class BrokerController {
         attributes: ['id', 'name', 'email', 'creci', 'phone' ]
       });
 
-
       return response.status(200).json(brokers)
 
     }
