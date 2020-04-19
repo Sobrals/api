@@ -6,9 +6,9 @@ services:
     ports:
       - "${DB_PORT}:5432"
     environment:
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASS=${DB_PASS}
-      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASS=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_DATABASE}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     logging:
